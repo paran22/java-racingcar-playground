@@ -7,14 +7,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CarTest {
+    Car sut; // system under test
 
-    @Test
-    void carNameLengthTest() {
-        assertThatThrownBy(() ->
-                new Car("abcdef")).isInstanceOf(IllegalArgumentException.class);
+    @BeforeEach
+    void setUp() {
+        sut = new Car("car", 0);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abcdefg", "abc123", "junnyland"})
+    void nameMustBeLessThanFiveLength(String carName) {
+        assertThatThrownBy(() -> new Car(carName)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
