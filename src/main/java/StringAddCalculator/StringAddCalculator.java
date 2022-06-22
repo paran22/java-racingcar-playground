@@ -1,4 +1,4 @@
-package racingcar;
+package StringAddCalculator;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
